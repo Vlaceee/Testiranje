@@ -1,0 +1,19 @@
+<article class="brands-page">
+  <header class="brands-hero"><div class="visual" role="img" aria-label="Profesionalni alati različitih proizvođača u radionici"></div><div class="hero-copy"><span>ForgeMart brendovi</span><h1>Najbolji alat počinje dobrim proizvođačem.</h1><p>Biramo brendove sa jasnom namenom, pouzdanim servisom i priborom koji je dostupan kada vam zatreba.</p></div></header>
+
+  <main class="section-shell">
+    <section class="brand-browser" aria-labelledby="brands-title">
+      <header><div><span>Proizvođači A—Z</span><h2 id="brands-title">Pronađi svoj sistem.</h2></div><label><span>Pretraži brendove</span><input type="search" placeholder="Na primer: Bosch, aku alat, merenje…" [value]="search()" (input)="updateSearch($event)"><b aria-hidden="true">⌕</b></label></header>
+      <p class="result-count">{{ filteredBrands().length }} brendova</p>
+      <div class="brand-grid">
+        @for (brand of filteredBrands(); track brand.name) {
+          <a routerLink="/shop" [style.--brand-accent]="brand.accent"><strong>{{ brand.name }}</strong><span>{{ brand.category }}</span><b aria-hidden="true">↗</b></a>
+        } @empty { <div class="empty"><strong>Nema rezultata.</strong><span>Probajte naziv proizvođača ili vrstu alata.</span></div> }
+      </div>
+    </section>
+  </main>
+
+  <section class="featured-brand" aria-labelledby="bosch-title"><div class="feature-visual" role="img" aria-label="Aku bušilica i pribor u profesionalnoj radionici"></div><div class="feature-copy"><span>Izdvojeni proizvođač</span><div class="bosch-mark">BOSCH <small>PROFESSIONAL</small></div><h2 id="bosch-title">Professional tools<br>for professionals.</h2><p>Plavi Bosch program pokriva električne i aku alate, mernu tehniku i veliki sistem profesionalnog pribora.</p><nav aria-label="Bosch kategorije"><a routerLink="/shop">Električni alati</a><a routerLink="/shop">Aku alati</a><a routerLink="/shop">Pribor</a><a routerLink="/shop">Merna oprema</a></nav><a class="feature-cta" routerLink="/shop">Pogledaj popularne proizvode →</a></div></section>
+
+  <section class="brand-principles section-shell"><header><span>Naš kriterijum</span><h2>Brend nije samo logo.</h2></header><div><article><b>01</b><h3>Dostupan pribor</h3><p>Potrošni delovi i kompatibilna oprema moraju biti lako dostupni.</p></article><article><b>02</b><h3>Pouzdana garancija</h3><p>Jasni uslovi i servisna mreža koju možete stvarno koristiti.</p></article><article><b>03</b><h3>Sistem koji raste</h3><p>Platforme koje omogućavaju da alat dopunjujete bez nepotrebnih dupliranja.</p></article></div></section>
+</article>

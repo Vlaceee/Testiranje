@@ -1,0 +1,167 @@
+<article class="home-page">
+  <section class="home-hero" aria-labelledby="home-title">
+    <img class="hero-image" src="/assets/editorial/home-hero.webp"
+         alt="Profesionalna radionica sa aku bušilicom i majstorom na gradilištu"
+         width="1812" height="868" fetchpriority="high">
+    <div class="hero-shade"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="section-kicker light">Radionica počinje ovde</span>
+        <h1 id="home-title">Sve za posao.<br><em>Na jednom mestu.</em></h1>
+        <p>Profesionalni alat, građevinski materijal, zaštitna oprema i sve što vam treba — od radionice do gradilišta.</p>
+        <div class="hero-actions">
+          <a class="button primary" routerLink="/shop">Pogledaj proizvode <span aria-hidden="true">→</span></a>
+          <a class="button ghost" href="#popular">Aktuelne akcije</a>
+        </div>
+      </div>
+      <aside class="proof-panel" aria-label="Prednosti ForgeMart prodavnice">
+        <div><strong>15.000+</strong><span>proizvoda u ponudi</span></div>
+        <div><strong>24–48 h</strong><span>brza dostava</span></div>
+        <div><strong>100%</strong><span>sigurna kupovina</span></div>
+        <div><strong>6 dana</strong><span>stručna podrška</span></div>
+      </aside>
+    </div>
+    <a class="scroll-cue" href="#categories" aria-label="Idi na kategorije"><span></span> Istraži ponudu</a>
+  </section>
+
+  <section class="section-shell categories-section" id="categories" aria-labelledby="categories-title">
+    <header class="section-heading split-heading">
+      <div><span class="section-kicker">Ponuda po kategorijama</span><h2 id="categories-title">Šta danas tražiš?</h2></div>
+      <p>Od prve skice do poslednjeg šrafa — pronađi proverenu opremu za posao koji je pred tobom.</p>
+    </header>
+    <nav class="category-grid" aria-label="Kategorije proizvoda">
+      @for (category of categories; track category.name; let index = $index) {
+        <a href="#catalog" class="category-card" [style.background-position]="category.position">
+          <span class="category-number">{{ (index + 1).toString().padStart(2, '0') }}</span>
+          <span class="category-copy"><small>{{ category.label }}</small><strong>{{ category.name }}</strong></span>
+          <span class="category-arrow" aria-hidden="true">↗</span>
+        </a>
+      }
+    </nav>
+  </section>
+
+  <section class="jobs-section" aria-labelledby="jobs-title">
+    <div class="section-shell">
+      <header class="section-heading light-heading">
+        <span class="section-kicker light">Rešenja, ne samo proizvodi</span>
+        <h2 id="jobs-title">Za svaki posao postoji pravi alat.</h2>
+      </header>
+      <div class="jobs-grid">
+        @for (job of jobs; track job.title) {
+          <article class="job-card" [class.wide]="job.className === 'wide'">
+            <div class="job-image" [style.background-position]="job.position" role="img" [attr.aria-label]="job.title"></div>
+            <div><h3>{{ job.title }}</h3><p>{{ job.copy }}</p><a href="#catalog">Pogledaj izbor <span aria-hidden="true">→</span></a></div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell products-showcase" id="popular" aria-labelledby="popular-title">
+    <header class="section-heading split-heading">
+      <div><span class="section-kicker">Provereno na terenu</span><h2 id="popular-title">Proizvodi kojima se veruje.</h2></div>
+      <div class="product-tabs" role="tablist" aria-label="Izdvojeni proizvodi">
+        <button type="button" role="tab" [attr.aria-selected]="selectedTab() === 'bestseller'" [class.active]="selectedTab() === 'bestseller'" (click)="selectTab('bestseller')">Najprodavanije</button>
+        <button type="button" role="tab" [attr.aria-selected]="selectedTab() === 'new'" [class.active]="selectedTab() === 'new'" (click)="selectTab('new')">Novo</button>
+        <button type="button" role="tab" [attr.aria-selected]="selectedTab() === 'professional'" [class.active]="selectedTab() === 'professional'" (click)="selectTab('professional')">Pro izbor</button>
+        <button type="button" role="tab" [attr.aria-selected]="selectedTab() === 'sale'" [class.active]="selectedTab() === 'sale'" (click)="selectTab('sale')">Na akciji</button>
+      </div>
+    </header>
+    <div class="featured-grid" role="tabpanel">
+      @for (product of featuredProducts(); track product.id) {
+        <article class="featured-card">
+          <a [routerLink]="['/products', product.id]" class="featured-image">
+            @if (product.hasActiveDiscount) { <span class="sale-badge">−{{ product.discountPercentage }}%</span> }
+            <img [src]="product.imageUrl" [alt]="product.name" width="640" height="450" loading="lazy" (error)="imageFallback($event)">
+          </a>
+          <div class="featured-body">
+            <span>{{ product.brand }} · {{ product.categoryName }}</span>
+            <a [routerLink]="['/products', product.id]"><h3>{{ product.name }}</h3></a>
+            <div><strong>{{ money(product.currentPrice) }}</strong><button type="button" (click)="add(product)" [disabled]="product.stockQuantity <= 0" [attr.aria-label]="'Dodaj ' + product.name + ' u korpu'">+</button></div>
+          </div>
+        </article>
+      } @empty {
+        @for (item of [1,2,3,4]; track item) { <div class="product-skeleton" aria-hidden="true"></div> }
+      }
+    </div>
+  </section>
+
+  <section class="brands-strip" aria-labelledby="brand-strip-title">
+    <div class="section-shell">
+      <div class="brand-intro"><span class="section-kicker">Proizvođači</span><h2 id="brand-strip-title">Brendovi kojima veruju profesionalci.</h2><a routerLink="/brands">Svi brendovi →</a></div>
+      <div class="brand-wordmarks" aria-label="Izdvojeni brendovi">
+        @for (brand of ['BOSCH','MAKITA','DeWALT','Milwaukee','STANLEY','metabo','WERA','KNIPEX']; track brand) { <span>{{ brand }}</span> }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell promo-platform" aria-labelledby="platform-title">
+    <div class="promo-photo" role="img" aria-label="Aku alat na profesionalnom radnom stolu"></div>
+    <div class="promo-copy"><span class="section-kicker light">18V platforma</span><h2 id="platform-title">Jedna baterija.<br>Čitava radionica.</h2><p>Upoznaj sisteme u kojima jedna baterija pokreće desetine alata — manje čekanja, više urađenog posla.</p><a href="#catalog">Istraži sisteme <span aria-hidden="true">→</span></a></div>
+  </section>
+
+  <section class="professional-section" aria-labelledby="business-title">
+    <img src="/assets/editorial/professional-supply.webp" alt="Profesionalci organizuju isporuku materijala na gradilištu" width="1823" height="863" loading="lazy">
+    <div class="professional-shade"></div>
+    <div class="section-shell professional-content">
+      <div class="business-copy"><span class="section-kicker light">ForgeMart za firme</span><h2 id="business-title">Kupujete za firmu?</h2><p>Posebni uslovi za izvođače, radionice, servise i kompanije kojima je pouzdano snabdevanje deo svakog radnog dana.</p><a class="button primary" href="mailto:prodaja@forgemart.rs">Zatraži poslovnu ponudu</a></div>
+      <div class="business-benefits">
+        <article><span>01</span><h3>Veće količine</h3><p>Posebne ponude za porudžbine na veliko.</p></article>
+        <article><span>02</span><h3>Ponude za firme</h3><p>Individualna ponuda prema vašem projektu.</p></article>
+        <article><span>03</span><h3>Pouzdano snabdevanje</h3><p>Planirana isporuka materijala i opreme.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell reasons-section" aria-labelledby="reasons-title">
+    <header class="section-heading"><span class="section-kicker">Zašto ForgeMart</span><h2 id="reasons-title">Podrška koja traje koliko i posao.</h2></header>
+    <div class="reasons-grid">
+      <article><span>01</span><h3>Stručna podrška</h3><p>Ne znate koja burgija ide uz materijal? Naš tim pomaže da izaberete bez nagađanja.</p></article>
+      <article><span>02</span><h3>Proveren asortiman</h3><p>Biramo proizvode namenjene stvarnom radu, jasnim rezultatima i dugom veku.</p></article>
+      <article><span>03</span><h3>Brza isporuka</h3><p>Porudžbina napušta skladište brzo, uredno spakovana i spremna za teren.</p></article>
+      <article><span>04</span><h3>Sigurna kupovina</h3><p>Jasne cene, zaštićen proces kupovine i podrška pre i nakon porudžbine.</p></article>
+    </div>
+  </section>
+
+  <section class="projects-section" id="projects" aria-labelledby="projects-title">
+    <div class="section-shell">
+      <header class="section-heading split-heading"><div><span class="section-kicker">Inspiracija iz radionice</span><h2 id="projects-title">Šta danas pravimo?</h2></div><p>Jasni vodiči, spisak materijala i proizvodi koji odgovaraju svakom koraku.</p></header>
+      <div class="projects-grid">
+        <a href="#catalog" class="project-card project-one"><span>6 koraka · oko 3 sata</span><h3>Napravi baštensku klupu</h3><b>Otvori projekat →</b></a>
+        <a href="#catalog" class="project-card project-two"><span>Vodič za početnike</span><h3>Postavi laminat bez lutanja</h3><b>Otvori projekat →</b></a>
+        <a href="#catalog" class="project-card project-three"><span>12 potrebnih proizvoda</span><h3>Police za ozbiljnu radionicu</h3><b>Otvori projekat →</b></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-shell editorial-grid" aria-labelledby="guides-title">
+    <div class="guides-column">
+      <header class="section-heading"><span class="section-kicker">Saveti iz radionice</span><h2 id="guides-title">Znanje je deo alata.</h2></header>
+      <div class="guide-list">
+        @for (guide of guides; track guide[1]; let index = $index) {
+          <a href="#catalog"><span>{{ (index + 1).toString().padStart(2, '0') }} / {{ guide[0] }}</span><strong>{{ guide[1] }}</strong><b aria-hidden="true">↗</b></a>
+        }
+      </div>
+    </div>
+    @if (dealProduct(); as deal) {
+      <aside class="weekly-deal">
+        <span class="section-kicker light">Ponuda nedelje</span>
+        <img [src]="deal.imageUrl" [alt]="deal.name" width="640" height="450" loading="lazy" (error)="imageFallback($event)">
+        <div><small>{{ deal.brand }}</small><h2>{{ deal.name }}</h2>@if (deal.hasActiveDiscount) { <del>{{ money(deal.price) }}</del> }<strong>{{ money(deal.currentPrice) }}</strong><p>Ostalo {{ deal.stockQuantity }} komada</p><button type="button" (click)="add(deal)">Dodaj u korpu</button></div>
+      </aside>
+    }
+  </section>
+
+  <section class="new-arrivals" aria-labelledby="new-title">
+    <div class="section-shell new-inner">
+      <div class="new-heading"><span class="section-kicker light">Novo u radionici</span><h2 id="new-title">Sveže stiglo.<br>Spremno za posao.</h2><a routerLink="/shop">Pogledaj sve novitete →</a></div>
+      <div class="new-list">
+        @for (product of newProducts(); track product.id) {
+          <a [routerLink]="['/products', product.id]"><img [src]="product.imageUrl" [alt]="product.name" width="320" height="220" loading="lazy" (error)="imageFallback($event)"><span>{{ product.brand }}</span><strong>{{ product.name }}</strong><b>{{ money(product.currentPrice) }}</b></a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <fm-shop-page />
+</article>

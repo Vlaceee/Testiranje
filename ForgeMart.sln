@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36309.24
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForgeMart.Api", "backend\ForgeMart.Api\ForgeMart.Api.csproj", "{D12E1CB0-327B-4C5C-9BA9-6BDF2FF27E51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForgeMart.UnitTests", "tests\ForgeMart.UnitTests\ForgeMart.UnitTests.csproj", "{F62B2098-8937-4439-B7C3-E65A9E83E709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForgeMart.ComponentTests", "tests\ForgeMart.ComponentTests\ForgeMart.ComponentTests.csproj", "{0D228019-9CB0-4226-A0AB-EAAE2DA15369}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D12E1CB0-327B-4C5C-9BA9-6BDF2FF27E51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D12E1CB0-327B-4C5C-9BA9-6BDF2FF27E51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D12E1CB0-327B-4C5C-9BA9-6BDF2FF27E51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D12E1CB0-327B-4C5C-9BA9-6BDF2FF27E51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F62B2098-8937-4439-B7C3-E65A9E83E709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62B2098-8937-4439-B7C3-E65A9E83E709}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62B2098-8937-4439-B7C3-E65A9E83E709}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62B2098-8937-4439-B7C3-E65A9E83E709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D228019-9CB0-4226-A0AB-EAAE2DA15369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D228019-9CB0-4226-A0AB-EAAE2DA15369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D228019-9CB0-4226-A0AB-EAAE2DA15369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D228019-9CB0-4226-A0AB-EAAE2DA15369}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

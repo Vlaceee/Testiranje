@@ -1,0 +1,44 @@
+# .NET
+**/bin/
+**/obj/
+TestResults/
+coverage/
+**/coverage/
+*.trx
+*.coverage
+*.coveragexml
+*.user
+*.suo
+
+# Angular / Node
+node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+playwright-report/
+test-results/
+.playwright/
+**/.auth/
+blob-report/
+.run/
+
+# Local configuration
+.env
+.env/
+.env.*
+!.env.example
+appsettings.Local.json
+appsettings.*.Local.json
+
+# IDE / OS
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary PDF inspection files
+tmp/
+*.log
+
+/scripts/

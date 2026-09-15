@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <Playwright>
+    <BrowserName>chromium</BrowserName>
+    <ExpectTimeout>7000</ExpectTimeout>
+    <LaunchOptions>
+      <Headless>true</Headless>
+      <Channel>chrome</Channel>
+    </LaunchOptions>
+  </Playwright>
+  <RunConfiguration>
+    <EnvironmentVariables>
+      <FORGEMART_API_URL>http://localhost:5073</FORGEMART_API_URL>
+      <FORGEMART_WEB_URL>http://localhost:4200</FORGEMART_WEB_URL>
+    </EnvironmentVariables>
+  </RunConfiguration>
+</RunSettings>

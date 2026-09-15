@@ -1,0 +1,24 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{cs,csproj,json,yml,yaml,ts,html,scss,md}]
+indent_style = space
+indent_size = 2
+
+[*.cs]
+indent_size = 4
+dotnet_sort_system_directives_first = true
+csharp_new_line_before_open_brace = all
+
+# EF Core migration bodies are generated and can contain repeated constant arrays.
+[backend/ForgeMart.Api/Data/Migrations/*.cs]
+dotnet_diagnostic.CA1861.severity = none
+
+# NUnit test naming follows the widely used Method_Scenario_ExpectedResult convention.
+[tests/**/*.cs]
+dotnet_diagnostic.CA1707.severity = none

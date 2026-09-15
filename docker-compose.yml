@@ -1,0 +1,23 @@
+name: forgemart
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: forgemart-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-hardware_store}
+      POSTGRES_USER: ${POSTGRES_USER:-forgemart}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-forgemart_dev}
+    ports:
+      - "5500:5432"
+    volumes:
+      - forgemart-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  forgemart-postgres-data:
